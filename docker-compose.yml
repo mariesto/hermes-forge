@@ -1,0 +1,41 @@
+services:
+  order-db:
+    image: postgres
+    environment:
+      POSTGRES_DB: order-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pwd123
+    ports:
+      - "5432:5432"
+
+  # order-service:
+  #   build:
+  #     context: ./order-service
+  #     dockerfile: Dockerfile
+  #   container_name: order-service
+  #   ports:
+  #     - "9873:9873"
+  #   depends_on:
+  #     - order-db
+  #   environment:
+  #     SPRING_DATASOURCE_URL: jdbc:postgresql://order-db:5432/order-db
+  #     SPRING_DATASOURCE_USERNAME: postgres
+  #     SPRING_DATASOURCE_PASSWORD: pwd123
+  
+  # prometheus:
+  #   image: prom/prometheus
+  #   extra_hosts:
+  #     - host.docker.internal:host-gateway
+  #   command:
+  #     - --config.file=/etc/prometheus/prometheus.yml
+  #     - --web.enable-remote-write-receiver
+  #     - --enable-feature=native-histograms
+  #   volumes:
+  #     - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+  #   ports:
+  #     - "9090:9090"
+
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - "3000:3000"
